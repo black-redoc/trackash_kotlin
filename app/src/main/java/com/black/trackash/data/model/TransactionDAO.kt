@@ -13,7 +13,7 @@ interface TransactionDAO {
     fun getMonthTransactions(startDate: LocalDate): LiveData<List<Transaction>>
 
     @Query("select count(id) from `transaction` where date(date) >= date(:startDate)")
-    fun countTransaction(startDate: LocalDate)
+    fun countTransaction(startDate: LocalDate): Int
 
     @Update
     fun update(transaction: Transaction)
