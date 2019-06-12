@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TracKash</string>
+    <string name="action_settings">Settings</string>
+    <string name="black">Black</string>
+    <string name="terms">Terms \u0026 Conditions</string>
+    <string-array textSize="25sp" name="entries">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+</resources>
