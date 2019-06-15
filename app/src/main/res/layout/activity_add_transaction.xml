@@ -6,8 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.AddTransactionActivity">
-
-
     <RelativeLayout
     android:id="@+id/banner"
     android:background="@color/colorAccent"
@@ -90,8 +88,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
     <EditText
-    android:text="@={viewModel.concept}"
-    android:inputType="text"
+    tools:text=""
     android:id="@+id/txtConcept"
     android:layout_width="match_parent"
     android:layout_margin="15dp"
@@ -105,7 +102,6 @@
     android:layout_height="wrap_content"/>
     <EditText
     android:id="@+id/txtValue"
-
     android:inputType="numberDecimal"
     android:layout_margin="15dp"
     android:layout_width="match_parent"
@@ -119,6 +115,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
     <Spinner
+            android:id="@+id/spType"
     android:layout_margin="10dp"
     android:textSize="35sp"
     android:layout_gravity="start"

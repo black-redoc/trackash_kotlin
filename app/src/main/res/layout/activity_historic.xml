@@ -50,44 +50,92 @@
 
             <TextView
                     android:textColor="@color/startBlue"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
+                    android:text="Jan"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textColor="@color/startBlue"
+                    android:textSize="15sp"
+                    android:text="Feb"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textColor="@color/startBlue"
+                    android:textSize="15sp"
                     android:text="Mar"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/startBlue"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="Apr"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/startBlue"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="May"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/startBlue"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="Jun"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/startBlue"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="Jul"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/startBlue"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:text="Aug"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textColor="@color/startBlue"
+                    android:textSize="15sp"
+                    android:text="Sep"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textColor="@color/startBlue"
+                    android:textSize="15sp"
+                    android:text="Oct"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textColor="@color/startBlue"
+                    android:textSize="15sp"
+                    android:text="Nov"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textColor="@color/startBlue"
+                    android:textSize="15sp"
+                    android:text="Dec"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
         </LinearLayout>

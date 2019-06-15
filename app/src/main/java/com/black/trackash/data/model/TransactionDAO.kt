@@ -6,11 +6,17 @@ import org.threeten.bp.LocalDate
 
 @Dao
 interface TransactionDAO {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     fun insert(transactions: List<Transaction>)
+
+    @Insert
+    fun instert(transaction: Transaction)
 
     @Query("select * from `transaction` where date(date) >= date(:startDate)")
     fun getMonthTransactions(startDate: LocalDate): LiveData<List<Transaction>>
+
+    @Query("select * from `transaction` where date(date) >= date(:startDate)  order by id desc limit 3")
+    fun getLastTransactions(startDate: LocalDate): LiveData<List<Transaction>>
 
     @Query("select count(id) from `transaction` where date(date) >= date(:startDate)")
     fun countTransaction(startDate: LocalDate): Int

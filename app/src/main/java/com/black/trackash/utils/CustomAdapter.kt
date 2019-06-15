@@ -44,6 +44,6 @@ class CustomAdapter(
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val txtConcept = view.findViewById<View>(R.id.txtConcept) as TextView
         val txtValue = view.findViewById<View>(R.id.txtValue) as TextView
-        val iconArrow = view.findViewById<View>(R.id.iconArrow) as CircleImageView
+        val iconArrow = view.findViewById<View>(R.id.iconArrow_) as CircleImageView
     }
 }
