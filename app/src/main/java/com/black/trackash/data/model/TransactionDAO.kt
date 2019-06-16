@@ -12,11 +12,11 @@ interface TransactionDAO {
     @Insert
     fun instert(transaction: Transaction)
 
-    @Query("select * from `transaction` where date(date) >= date(:startDate)")
-    fun getMonthTransactions(startDate: LocalDate): LiveData<List<Transaction>>
+    @Query("select * from `transaction` where date(date) >= date(:startDate) and date(date) < date(:endDate) order by id desc")
+    fun getMonthTransactions(startDate: LocalDate, endDate: LocalDate): LiveData<List<Transaction>>
 
-    @Query("select * from `transaction` where date(date) >= date(:startDate)  order by id desc limit 3")
-    fun getLastTransactions(startDate: LocalDate): LiveData<List<Transaction>>
+    @Query("select * from `transaction` where date(date) >= date(:startDate) and date(date) < date(:endDate) order by id desc limit 3")
+    fun getLastTransactions(startDate: LocalDate, endDate: LocalDate): LiveData<List<Transaction>>
 
     @Query("select count(id) from `transaction` where date(date) >= date(:startDate)")
     fun countTransaction(startDate: LocalDate): Int

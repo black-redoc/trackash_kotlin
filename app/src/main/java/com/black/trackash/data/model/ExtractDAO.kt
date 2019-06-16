@@ -9,11 +9,14 @@ import androidx.room.Update
 @Dao
 interface ExtractDAO {
     @Insert
-    suspend fun insert(extract: Extract)
+    fun insert(extract: Extract)
 
     @Query("select * from extract order by id desc limit 1")
-    suspend fun getLast(): LiveData<Extract>
+    fun getLast(): LiveData<Extract>
+
+    @Query("select count(*) from extract")
+    fun getCount(): Int
 
     @Update
-    suspend fun update(extract: Extract)
+    fun update(extract: Extract)
 }

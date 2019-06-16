@@ -13,13 +13,14 @@ class TransactionRepositoryImpl(
 
     override suspend fun getTransactions(startDate: LocalDate): LiveData<out List<Transaction>> {
         return withContext(Dispatchers.IO) {
-            return@withContext transactionDao.getMonthTransactions(startDate)
+            val endMonth = startDate.withMonth(startDate.monthValue+1)
+            return@withContext transactionDao.getMonthTransactions(startDate, endMonth)
         }
     }
 
     override suspend fun lastTransactions(startDate: LocalDate): LiveData<out List<Transaction>> {
         return withContext(Dispatchers.IO) {
-            return@withContext transactionDao.getLastTransactions(startDate)
+            return@withContext transactionDao.getLastTransactions(startDate, startDate.withMonth(startDate.monthValue+1))
         }
     }
 

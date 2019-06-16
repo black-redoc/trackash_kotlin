@@ -11,4 +11,8 @@ data class Transaction(
     val type: String,
     val date: LocalDate,
     @PrimaryKey(autoGenerate = true) var id: Long? = null
-)
+) {
+    override fun toString(): String {
+        return "Transaction(concept='$concept', value=$value, type='$type', date=$date, id=$id)"
+    }
+}

@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Extract(
-    @PrimaryKey(autoGenerate = false)
-    val id: Int?,
     val month: String,
     val total: Double,
     val incomes: Double,
-    val expenses: Double
+    val expenses: Double,
+    @PrimaryKey(autoGenerate = false)
+    val id: Int? = null
 )

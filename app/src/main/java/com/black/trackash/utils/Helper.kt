@@ -5,7 +5,7 @@ import java.lang.StringBuilder
 
 fun Double.exchange(): String {
     val value = this.toInt().toString()
-    val newValue: StringBuilder = StringBuilder()
+    val newValue = StringBuilder()
     var count = 1
     for(i in value.reversed()) {
         if(count == 3) {
@@ -17,7 +17,20 @@ fun Double.exchange(): String {
         }
     }
 
-    val v = newValue.toString().reversed()
+    var v = newValue.toString().reversed()
 
-    return if(v[0] == '.') v.substring(1) else v
+    v =  if(v[0] == '.') v.substring(1) else v
+    return "$$v"
+}
+
+fun Double.doubleExchange(): String {
+    val value = this.toString()
+
+    return when {
+        value.length == 6  -> "$${value.substring(0,2)[0]}k"
+        value.length in 6..7 -> "$${value.substring(0,2)}k"
+        value.length == 8 -> "$${value.substring(0,2)[0]}.${value.substring(0,2)[1]}m"
+        value.length in 8..9 -> "$${value.substring(0,3)}m"
+        else -> "$$value"
+    }
 }

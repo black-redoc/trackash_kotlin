@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.black.trackash.R
+import com.black.trackash.data.model.Extract
 import com.black.trackash.data.model.Transaction
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDate
+import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
@@ -25,15 +27,18 @@ class AddTransactionActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by kodein()
     private val viewModelFactory: TransactionViewModelFactory by instance()
+    private val extViewModelFactory: ExtractViewModelFactory by instance()
 
-    private lateinit var globalTransactions: MutableLiveData<List<Transaction>>
     private lateinit var viewModel: TransactionViewModel
+    private lateinit var extViewModel: ExtractViewModel
+    private lateinit var ext: Extract
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_transaction)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TransactionViewModel::class.java)
-
+        extViewModel = ViewModelProviders.of(this, extViewModelFactory).get(ExtractViewModel::class.java)
+        getLastExtract()
         initializeUI()
     }
 
@@ -44,7 +49,13 @@ class AddTransactionActivity : AppCompatActivity(), KodeinAware {
         onSubmit()
     }
 
-    private fun updateGlobalTransactions() {}
+    private fun getLastExtract() = runBlocking {
+        val extra = extViewModel.last.await()
+        extra.observe(this@AddTransactionActivity, Observer {
+            if (it == null) return@Observer
+            ext = it
+        })
+    }
 
     // this function enable the date picker dialog
     private fun performDPD() {
@@ -55,7 +66,7 @@ class AddTransactionActivity : AppCompatActivity(), KodeinAware {
 
         txtDate.setOnClickListener {
             val dtp = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { it, mYear, mMonth, mDay ->
-                val txt = "${if (mDay < 10) "0$mDay" else mDay}/${if (mMonth < 10) "0$mMonth" else mMonth}/$mYear"
+                val txt = "${if (mDay < 10) "0$mDay" else mDay}/${if (mMonth < 10) "0${mMonth+1}" else mMonth}/$mYear"
                 txtDate.setText(txt)
             }, year, month, day)
 
@@ -72,7 +83,8 @@ class AddTransactionActivity : AppCompatActivity(), KodeinAware {
             if (!validate())
                 Toast.makeText(applicationContext, "There is incomplete fields", Toast.LENGTH_SHORT).show()
             else {
-                val now = LocalDate.parse(txtDate.text, DateTimeFormatter.ofPattern("d/MM/yyyy"))
+                val now = LocalDate.parse(txtDate.text, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                now.withMonth(now.monthValue)
                 // Persist and Update View
 
                 viewModel.insert(Transaction(
@@ -81,6 +93,10 @@ class AddTransactionActivity : AppCompatActivity(), KodeinAware {
                     type = spType.selectedItem as String,
                     date = now)
                 )
+
+                // Persist extract
+                if (spType.selectedItem == "Income") persistExtract(income = ""+txtValue.text)
+                else persistExtract(expense = txtValue.text.toString())
 
                 // Clean View
                 txtConcept.setText("")
@@ -92,6 +108,25 @@ class AddTransactionActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
+    private fun persistExtract(expense: String = "0", income: String = "0")
+            = runBlocking (Dispatchers.IO) {
+        if(extViewModel.count.await() < 1) {
+            extViewModel.insert(
+                Extract(
+                    LocalDate.now(ZoneId.of("UTC-05:00")).format(DateTimeFormatter.ofPattern("MMM yyyy")),
+                    income.toDouble() - expense.toDouble(),
+                    income.toDouble(),
+                    expense.toDouble()))
+        } else {
+            val last = extViewModel.last.await().value
+            extViewModel.update(Extract(
+                last!!.month,
+                last.total + (income.toDouble() - expense.toDouble()),
+                last.incomes + income.toDouble(),
+                last.expenses + expense.toDouble(),
+                last.id))
+        }
+    }
 
     override fun finish() {
         super.finish()

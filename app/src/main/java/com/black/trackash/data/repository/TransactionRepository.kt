@@ -7,7 +7,7 @@ import org.threeten.bp.LocalDate
 interface TransactionRepository {
     suspend fun getTransactions(startDate: LocalDate): LiveData<out List<Transaction>>
 
-    suspend fun lastTransactions(stardDate: LocalDate): LiveData<out List<Transaction>>
+    suspend fun lastTransactions(startDate: LocalDate): LiveData<out List<Transaction>>
 
     suspend fun insertTransaction(transaction: Transaction)
 

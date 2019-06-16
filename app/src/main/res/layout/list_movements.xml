@@ -29,18 +29,22 @@
                     android:layout_height="80dp"
                     android:src="@drawable/ic_arrow_up"/>
 
-            <LinearLayout
+            <RelativeLayout
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                 <TextView
+                        android:layout_centerVertical="true"
+                        android:text="Allowance"
                         android:id="@+id/concept_"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"/>
                 <TextView
+                        android:layout_below="@id/concept_"
+                        android:text="50.000"
                         android:id="@+id/value_"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -48,9 +52,18 @@
                         android:textSize="20sp"
                         android:textColor="@color/incomesColor"/>
 
-
-            </LinearLayout>
-
+                <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/txtDate"
+                        android:textSize="18sp"
+                        android:text="201/06/10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </RelativeLayout>
         </LinearLayout>
 
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>

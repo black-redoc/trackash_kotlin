@@ -154,11 +154,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 <TextView
+                        android:id="@+id/totalCash"
                         android:textColor="@color/startBlue"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$750k"
+                        android:text="$0"
                         android:textSize="25sp"/>
                 <TextView
                         android:layout_gravity="center_horizontal"
@@ -179,11 +180,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 <TextView
+                        android:id="@+id/txtIncomes"
                         android:textColor="@color/incomesColor"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$800k"
+                        android:text="$0"
                         android:textSize="25sp"/>
                 <TextView
                         android:layout_gravity="center_horizontal"
@@ -204,11 +206,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 <TextView
+                        android:id="@+id/txtExpenses"
                         android:textColor="@color/expensesColor"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$50k"
+                        android:text="$0"
                         android:textSize="25sp"/>
                 <TextView
                         android:layout_gravity="center_horizontal"

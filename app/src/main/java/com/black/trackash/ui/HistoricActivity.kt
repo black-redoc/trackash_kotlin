@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.black.trackash.R
 import com.black.trackash.data.model.Transaction
 import com.black.trackash.data.model.TransactionItem
-import com.black.trackash.utils.CustomAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.activity_historic.*
@@ -38,16 +37,16 @@ class HistoricActivity : AppCompatActivity(), KodeinAware {
 
     private fun initializeUI() {
         bindUI()
-
+        updateUI()
         toHome.setOnClickListener { finish() }
     }
 
 
     private fun bindUI() = runBlocking {
-        val tr = viewModel.transactions.await()
+        val tr = viewModel.monthlyTransactions.await()
         tr.observe(this@HistoricActivity, Observer {
             if (it == null) return@Observer
-            startRecyclerView(it.reversed().toTransactionItems())
+            startRecyclerView(it.toTransactionItems())
         })
     }
 
@@ -77,5 +76,84 @@ class HistoricActivity : AppCompatActivity(), KodeinAware {
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up)
+    }
+
+    private fun atMonth(month: Int): LocalDate {
+        return LocalDate.of(LocalDate.now(ZoneId.of("UTC-05:00")).year,month,1)
+    }
+
+    private fun updateUI() {
+        m1.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(1)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m2.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(2)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m3.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(3)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m4.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(4)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m5.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(5)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m6.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(6)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m7.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(7)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m8.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(8)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m9.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(9)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m10.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(10)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m11.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(11)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
+        m12.setOnClickListener { runBlocking{
+            val transactions = viewModel.transactionByMonth(atMonth(12)).value.await()
+            transactions.observe(this@HistoricActivity, Observer {
+                startRecyclerView(it.toTransactionItems())
+            })
+        }}
     }
 }

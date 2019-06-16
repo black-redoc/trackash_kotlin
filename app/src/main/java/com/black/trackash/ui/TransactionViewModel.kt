@@ -21,16 +21,20 @@ class TransactionViewModel (
         transactionRepository.getTransactions(start)
     }
 
-    val lastTransactions by lazyDeferred {
-        val now = LocalDate.now(ZoneId.of("UTC-05:00"))
-        val start = LocalDate.of(now.year,1,1)
-        transactionRepository.lastTransactions(start)
-    }
-
     val monthlyTransactions by lazyDeferred {
         val now = LocalDate.now(ZoneId.of("UTC-05:00"))
         val start = LocalDate.of(now.year,now.month,1)
+        transactionRepository.getTransactions(start)
+    }
+
+    val lastTransactions by lazyDeferred {
+        val now = LocalDate.now(ZoneId.of("UTC-05:00"))
+        val start = LocalDate.of(now.year,now.month,1)
         transactionRepository.lastTransactions(start)
+    }
+
+    fun transactionByMonth(date: LocalDate) = lazyDeferred {
+        return@lazyDeferred transactionRepository.getTransactions(date)
     }
 
     fun insert(transaction: Transaction)  = GlobalScope.launch  (Dispatchers.IO) {

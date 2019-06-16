@@ -2,7 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.3.40-eap-67'
-    ext.room_version = '2.1.0-rc01'
+    ext.room_version = '2.1.0'
     ext.kodein_version = '6.1.0'
     ext.lifecycle_version = '2.0.0'
     ext.retrofit_version = '2.5.0'
