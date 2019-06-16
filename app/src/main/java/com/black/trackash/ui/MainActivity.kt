@@ -23,6 +23,9 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDate
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity(), KodeinAware{
 
@@ -46,6 +49,8 @@ class MainActivity : AppCompatActivity(), KodeinAware{
     private fun initializeUI() {
         bindUI()
         enableMenu()
+
+        txtMonth.text = LocalDate.now(ZoneId.of("UTC-05:00")).format(DateTimeFormatter.ofPattern("MMM, yyyy"))
 
         fabHistoric.setOnClickListener { openHistoric() }
         txtHistoric.setOnClickListener { openHistoric() }
