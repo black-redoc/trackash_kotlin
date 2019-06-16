@@ -37,6 +37,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware {
     private fun bindUI() = runBlocking {
         val extract = viewModel.last.await()
         extract.observe(this@ProfileActivity, Observer {
+            if (it == null) return@Observer
             txtExpenses.setText(it.expenses.doubleExchange())
             txtIncomes.setText(it.incomes.doubleExchange())
             totalCash.setText(it.total.doubleExchange())

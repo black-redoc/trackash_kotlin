@@ -27,10 +27,11 @@ fun Double.doubleExchange(): String {
     val value = this.toString()
 
     return when {
-        value.length == 6  -> "$${value.substring(0,2)[0]}k"
+        value.length == 6  -> "$${value.substring(0,2)[0]}${return if(value.substring(0,2)[1].equals("0"))  ".${value.substring(0,2)[1]}" else ""}k"
         value.length in 6..7 -> "$${value.substring(0,2)}k"
-        value.length == 8 -> "$${value.substring(0,2)[0]}.${value.substring(0,2)[1]}m"
-        value.length in 8..9 -> "$${value.substring(0,3)}m"
+        value.length == 8 -> "$${value.substring(0,3)}k"
+        value.length == 9 -> "$${value.substring(0,2)[0]}.${value.substring(0,2)[1]}m"
+        value.length in 10..12 -> "$${value.substring(0,3)}m"
         else -> "$$value"
     }
 }
